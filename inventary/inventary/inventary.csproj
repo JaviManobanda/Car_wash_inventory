@@ -68,6 +68,12 @@
     <Compile Include="AddProducto.Designer.cs">
       <DependentUpon>AddProducto.cs</DependentUpon>
     </Compile>
+    <Compile Include="buscar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="buscar.Designer.cs">
+      <DependentUpon>buscar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +85,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddProducto.resx">
       <DependentUpon>AddProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="buscar.resx">
+      <DependentUpon>buscar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

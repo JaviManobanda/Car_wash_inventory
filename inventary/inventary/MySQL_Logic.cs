@@ -36,18 +36,19 @@ namespace inventary
         public void AddProduct(string name, string description, string unit_price, string unit_cost, string img_url, string units, string category, string marca , string codigo)
         {
 
-            string command = "insert into products(name, description, unit_cost, iva, imagen, id_units, id_category, id_marca, codigo) values('" 
-                + name+"', '" + description+"', "+unit_price+", "+unit_cost+", '"+img_url+
+            string command = "insert into products(name, description,unit_price, unit_cost, imagen, id_units, id_category, id_marca, codigo) values('" 
+                + name+"', '" + description+"', "+unit_price+", "+unit_cost+",'"+img_url+
                 "', (select idunits from units where name = '"+units+"'),(select idcategory from category where name = '"+
-                category+"'),(select idmarca from marca where name = '"+marca+"'))";
+                category+"'),(select idmarca from marca where name = '"+marca+"'),'"+codigo+"')";
 
             insertData(command);
         }
 
-        public void addProduct_to_Bodega(string nombre_bodega, string nombre_producto, string cantidad)
+        public void addProduct_to_Bodega(string nombre_bodega, string codigo, string cantidad, string packing)
         {
-            string command = "insert into bodega_product(id_bodega, id_product,stock) values((select idbodega from bodega where name = '"+ nombre_bodega +
-                "'),(select idproducts from products where name = '" + nombre_producto + "')," + cantidad + "); ";
+            string command = "insert into bodega_product(id_bodega, id_product,stock,id_packing) values((select idbodega from bodega where name = '"+ nombre_bodega +
+                "'),(select idproducts from products where codigo = '" + codigo + "')," + cantidad + 
+                ",(select idpacking from packing where name = '"+packing+"'))";
 
             insertData(command);
         }
@@ -67,6 +68,7 @@ namespace inventary
             }
             catch (Exception ex)
             {
+                conexionBD.Close();
                 MessageBox.Show("Error: " + ex.ToString());
             }
         }
@@ -93,7 +95,7 @@ namespace inventary
             }
             catch (Exception)
             {
-
+                conexionBD.Close();
                 throw;
             }
 
@@ -125,7 +127,7 @@ namespace inventary
             }
             catch (Exception)
             {
-
+                conexionBD.Close();
                 throw;
             }
 
@@ -158,7 +160,7 @@ namespace inventary
             }
             catch (Exception)
             {
-
+                conexionBD.Close();
                 throw;
             }
 
@@ -190,12 +192,42 @@ namespace inventary
             }
             catch (Exception)
             {
-
+                conexionBD.Close();
                 throw;
             }
 
             return bodegas;
 
+        }
+
+        public List<string> getPacking()
+        {
+            List<string> packings = new List<string>();
+
+            string command = "select * from packing";
+
+            try
+            {
+                sqlComman = new MySqlCommand(command);
+                sqlComman.Connection = conexionBD;
+                conexionBD.Open();
+
+                sqlReader = sqlComman.ExecuteReader();
+
+                while (sqlReader.Read())
+                {
+                    packings.Add(sqlReader.GetString(1));
+                }
+                conexionBD.Close();
+
+            }
+            catch (Exception)
+            {
+                conexionBD.Close();
+                throw;
+            }
+
+            return packings;
         }
 
 

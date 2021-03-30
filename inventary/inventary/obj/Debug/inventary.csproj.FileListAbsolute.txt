@@ -23,3 +23,4 @@ E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\obj\Debu
 E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\obj\Debug\inventary.exe
 E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\obj\Debug\inventary.pdb
 E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\obj\Debug\inventary.csprojAssemblyReference.cache
+E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\obj\Debug\inventary.buscar.resources
