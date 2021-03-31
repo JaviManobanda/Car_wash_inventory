@@ -21,7 +21,9 @@ namespace inventary
         MySqlDataReader sqlReader;
 
 
-        public MySQL_Logic( string servidor, string db, string user, string password)
+        private static MySQL_Logic _instance;
+
+        private MySQL_Logic( string servidor, string db, string user, string password)
         {
             this.servidor = servidor;
             this.db = db;
@@ -31,6 +33,16 @@ namespace inventary
             string stringConnection = "Database=" + db + "; Data Source=" + servidor + "; User Id=" + user + "; Password=" + password + "";
             conexionBD = new MySqlConnection(stringConnection);
 
+        }
+
+        public static MySQL_Logic getInstance(string servidor, string db, string user, string password)
+        {
+            if (_instance == null)
+            {
+                _instance = new MySQL_Logic(servidor, db, user, password);
+            }
+
+            return _instance;
         }
 
         public void AddProduct(string name, string description, string unit_price, string unit_cost, string img_url, string units, string category, string marca , string codigo)
@@ -72,139 +84,45 @@ namespace inventary
                 MessageBox.Show("Error: " + ex.ToString());
             }
         }
-        public List<string> getUnitsProduct()
+        public Dictionary<string, string> getUnitsProduct()
         {
-            List<string> unitsProducts = new List<string>();
 
+            
             string command = "select * from units";
-
-            try
-            {
-                sqlComman = new MySqlCommand(command);
-                sqlComman.Connection = conexionBD;
-                conexionBD.Open();
-
-                sqlReader = sqlComman.ExecuteReader();
-
-                while (sqlReader.Read())
-                {
-                    unitsProducts.Add(sqlReader.GetString(1));
-                }
-
-                conexionBD.Close();
-            }
-            catch (Exception)
-            {
-                conexionBD.Close();
-                throw;
-            }
-
-            return unitsProducts;
+            return getItems(command);
 
         }
 
-
-        public List<string> getCategoryProduct()
+        public Dictionary<string, string> getCategoryProduct()
         {
-            List<string> categoriesProducts = new List<string>();
-
             string command = "select * from category";
-
-            try
-            {
-                sqlComman = new MySqlCommand(command);
-                sqlComman.Connection = conexionBD;
-                conexionBD.Open();
-
-                sqlReader = sqlComman.ExecuteReader();
-
-                while (sqlReader.Read())
-                {
-                    categoriesProducts.Add(sqlReader.GetString(1));
-                }
-                conexionBD.Close();
-
-            }
-            catch (Exception)
-            {
-                conexionBD.Close();
-                throw;
-            }
-
-            return categoriesProducts;
+            return getItems(command);
 
         }
 
-
-
-        public List<string> getMarcaProduct()
+        public Dictionary<string, string> getMarcaProduct()
         {
-            List<string> marcasProducts = new List<string>();
-
             string command = "select * from marca";
-
-            try
-            {
-                sqlComman = new MySqlCommand(command);
-                sqlComman.Connection = conexionBD;
-                conexionBD.Open();
-
-                sqlReader = sqlComman.ExecuteReader();
-
-                while (sqlReader.Read())
-                {
-                    marcasProducts.Add(sqlReader.GetString(1));
-                }
-                conexionBD.Close();
-
-            }
-            catch (Exception)
-            {
-                conexionBD.Close();
-                throw;
-            }
-
-            return marcasProducts;
+            return getItems(command);
 
         }
 
-
-        public List<string> getBodega()
+        public Dictionary<string, string> getBodega()
         {
-            List<string> bodegas = new List<string>();
-
             string command = "select * from bodega";
-
-            try
-            {
-                sqlComman = new MySqlCommand(command);
-                sqlComman.Connection = conexionBD;
-                conexionBD.Open();
-
-                sqlReader = sqlComman.ExecuteReader();
-
-                while (sqlReader.Read())
-                {
-                    bodegas.Add(sqlReader.GetString(1));
-                }
-                conexionBD.Close();
-
-            }
-            catch (Exception)
-            {
-                conexionBD.Close();
-                throw;
-            }
-
-            return bodegas;
+            return getItems(command);
 
         }
 
-        public List<string> getPacking()
+        public Dictionary<string, string> getPacking()
         {
-            List<string> packings = new List<string>();
-
             string command = "select * from packing";
+            return getItems(command);
+        }
+
+        private Dictionary<string, string> getItems(string command)
+        {
+            Dictionary<string, string> dictValues = new Dictionary<string, string>();
 
             try
             {
@@ -216,7 +134,69 @@ namespace inventary
 
                 while (sqlReader.Read())
                 {
-                    packings.Add(sqlReader.GetString(1));
+
+                    dictValues.Add(sqlReader.GetString(1), sqlReader.GetString(0));
+
+                }
+
+                conexionBD.Close();
+            }
+            catch (Exception)
+            {
+                conexionBD.Close();
+                throw;
+            }
+
+            return dictValues;
+        }
+        public Tuple< List<Products>, string>   searchProducts(string searchItem, string filter)
+        {
+            List<Products> ProductList = new List<Products>();
+
+            string command = "select products.idproducts, products.name, products.description,  products.codigo, " +
+                                "marca.name as marca, " +
+                                "category.name as category, " +
+                                "units.name as units, " +
+                                "bodega_product.stock as stock, " +
+                                "packing.name as packing, " +
+                                "bodega.name as bodega, " +
+                                "bodega_product.id as id_bodega_product "+
+                                "from products " +
+                                "left join marca on marca.idmarca = products.id_marca " +
+                                "left join category on category.idcategory = products.id_category " +
+                                "left join units on units.idunits = products.id_units " +
+                                "left join bodega_product on bodega_product.id_product = products.idproducts " +
+                                "left join packing on packing.idpacking = bodega_product.id_packing " +
+                                "left join bodega on bodega.idbodega = bodega_product.id_bodega " +
+                                "where "+filter+" like '%"+ searchItem + "%'";
+
+            string id_bodegaProduct = string.Empty;
+
+            try
+            {
+                sqlComman = new MySqlCommand(command);
+                sqlComman.Connection = conexionBD;
+                conexionBD.Open();
+
+                sqlReader = sqlComman.ExecuteReader();
+
+                while (sqlReader.Read())
+                {
+                    ProductList.Add(new Products() {
+                        Id = sqlReader.GetString(0),
+                        Nombre  = sqlReader.GetString(1),
+                        Descripcion= sqlReader.GetString(2),
+                        Codigo = sqlReader.GetString(3),
+                        Marca  = sqlReader.GetString(4),
+                        Categoria= sqlReader.GetString(5),
+                        Unidades = sqlReader.GetString(6),
+                        Stock = sqlReader.GetString(7),
+                        Packing = sqlReader.GetString(8),
+                        Bodega  = sqlReader.GetString(9)
+                    });
+
+                    //tomo el id de la bodega y producto
+                    id_bodegaProduct = sqlReader.GetString(10);
                 }
                 conexionBD.Close();
 
@@ -227,10 +207,35 @@ namespace inventary
                 throw;
             }
 
-            return packings;
+            return new Tuple<List<Products>, string> (ProductList,id_bodegaProduct) ;
         }
 
 
+        public void updateProduct(string id, string name,
+            string description, string units, string category,
+            string marca, string stock, string packing, string id_bodega, string id_bodega_product)
+        {
+            //update producto
+            string command = "update products " +
+                "set " +
+                "name = '" + name + "', " +
+                "description = '" + description + "', " +
+                "id_units = " + units + ", " +
+                "id_category =" + category + ", " +
+                "id_marca = " + marca + " " +
+                "where idproducts =" + id ;
 
+            insertData(command);
+
+            //updtate bodega
+            command = "update bodega_product " +
+                "set " +
+                "id_bodega =" + id_bodega + "," +
+                "stock=" + stock + "," +
+                "id_packing=" + packing + " " +
+                "where id =" + id_bodega_product;
+
+            insertData(command);
+        }
     }
 }

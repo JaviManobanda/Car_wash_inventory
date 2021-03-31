@@ -1,6 +1,6 @@
 ﻿namespace inventary
 {
-    partial class UserControl1
+    partial class addProducts
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,13 +49,12 @@
             this.cbxCategories = new System.Windows.Forms.ComboBox();
             this.cbMarca = new System.Windows.Forms.ComboBox();
             this.cbxBodega = new System.Windows.Forms.ComboBox();
-            this.btnGuardar = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.txtQTY = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.CbxPacking = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox1.SuspendLayout();
+            this.grupBox_add = new System.Windows.Forms.GroupBox();
+            this.grupBox_add.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -78,12 +75,6 @@
             this.txtNombre.Size = new System.Drawing.Size(352, 22);
             this.txtNombre.TabIndex = 1;
             this.txtNombre.Text = " ";
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // label2
             // 
@@ -268,17 +259,6 @@
             this.cbxBodega.Size = new System.Drawing.Size(127, 24);
             this.cbxBodega.TabIndex = 10;
             // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Location = new System.Drawing.Point(156, 457);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(245, 28);
-            this.btnGuardar.TabIndex = 15;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.button2_Click);
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -318,25 +298,24 @@
             this.CbxPacking.Size = new System.Drawing.Size(132, 24);
             this.CbxPacking.TabIndex = 14;
             // 
-            // groupBox1
+            // grupBox_add
             // 
-            this.groupBox1.Controls.Add(this.txtQTY);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.CbxPacking);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Location = new System.Drawing.Point(42, 322);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(466, 115);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.grupBox_add.Controls.Add(this.txtQTY);
+            this.grupBox_add.Controls.Add(this.label11);
+            this.grupBox_add.Controls.Add(this.CbxPacking);
+            this.grupBox_add.Controls.Add(this.label12);
+            this.grupBox_add.Location = new System.Drawing.Point(42, 322);
+            this.grupBox_add.Name = "grupBox_add";
+            this.grupBox_add.Size = new System.Drawing.Size(466, 115);
+            this.grupBox_add.TabIndex = 12;
+            this.grupBox_add.TabStop = false;
+            this.grupBox_add.Text = "Stock";
             // 
-            // UserControl1
+            // addProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnGuardar);
+            this.Controls.Add(this.grupBox_add);
             this.Controls.Add(this.cbxBodega);
             this.Controls.Add(this.cbMarca);
             this.Controls.Add(this.cbxCategories);
@@ -359,10 +338,11 @@
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "UserControl1";
-            this.Size = new System.Drawing.Size(549, 507);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Name = "addProducts";
+            this.Size = new System.Drawing.Size(549, 455);
+            this.Load += new System.EventHandler(this.UserControl1_Load);
+            this.grupBox_add.ResumeLayout(false);
+            this.grupBox_add.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -371,32 +351,30 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtCosto;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtImagen;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox cbxUnits;
-        private System.Windows.Forms.ComboBox cbxCategories;
-        private System.Windows.Forms.ComboBox cbMarca;
-        private System.Windows.Forms.ComboBox cbxBodega;
-        private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtQTY;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox CbxPacking;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grupBox_add;
+        public System.Windows.Forms.TextBox txtNombre;
+        public System.Windows.Forms.TextBox txtDescripcion;
+        public System.Windows.Forms.TextBox txtPrecio;
+        public System.Windows.Forms.TextBox txtCosto;
+        public System.Windows.Forms.TextBox txtImagen;
+        public System.Windows.Forms.TextBox txtCodigo;
+        public System.Windows.Forms.ComboBox cbxUnits;
+        public System.Windows.Forms.ComboBox cbxCategories;
+        public System.Windows.Forms.ComboBox cbMarca;
+        public System.Windows.Forms.ComboBox cbxBodega;
+        public System.Windows.Forms.TextBox txtQTY;
+        public System.Windows.Forms.ComboBox CbxPacking;
     }
 }

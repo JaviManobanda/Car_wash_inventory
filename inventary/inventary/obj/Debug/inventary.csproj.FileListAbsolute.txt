@@ -14,7 +14,6 @@ E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\bin\Debu
 E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\bin\Debug\K4os.Hash.xxHash.dll
 E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\bin\Debug\MySql.Data.xml
-E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\obj\Debug\inventary.UserControl1.resources
 E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\obj\Debug\inventary.Form1.resources
 E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\obj\Debug\inventary.Properties.Resources.resources
 E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\obj\Debug\inventary.csproj.GenerateResource.cache
@@ -24,3 +23,4 @@ E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\obj\Debu
 E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\obj\Debug\inventary.pdb
 E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\obj\Debug\inventary.csprojAssemblyReference.cache
 E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\obj\Debug\inventary.buscar.resources
+E:\Repositorio_Git\16_Inventario_lavadora\1_Desktop\inventary\inventary\obj\Debug\inventary.addProducts.resources

@@ -30,8 +30,9 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.userControl11 = new inventary.addProducts();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.userControl11 = new inventary.UserControl1();
             this.buscar1 = new inventary.buscar();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -46,33 +47,32 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(855, 831);
+            this.tabControl1.Size = new System.Drawing.Size(1006, 831);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.userControl11);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Size = new System.Drawing.Size(847, 802);
+            this.tabPage1.Size = new System.Drawing.Size(998, 802);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Agregar Producto";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
-            // tabPage2
+            // button1
             // 
-            this.tabPage2.Controls.Add(this.buscar1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(847, 802);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.button1.Location = new System.Drawing.Point(352, 626);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // userControl11
             // 
@@ -81,19 +81,32 @@
             this.userControl11.Name = "userControl11";
             this.userControl11.Size = new System.Drawing.Size(549, 507);
             this.userControl11.TabIndex = 0;
+            this.userControl11.Load += new System.EventHandler(this.userControl11_Load);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.buscar1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage2.Size = new System.Drawing.Size(998, 802);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // buscar1
             // 
-            this.buscar1.Location = new System.Drawing.Point(143, 17);
+            this.buscar1.Location = new System.Drawing.Point(11, 21);
             this.buscar1.Name = "buscar1";
-            this.buscar1.Size = new System.Drawing.Size(519, 684);
+            this.buscar1.Size = new System.Drawing.Size(859, 684);
             this.buscar1.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(879, 731);
+            this.ClientSize = new System.Drawing.Size(1030, 731);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
@@ -112,7 +125,8 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private UserControl1 userControl11;
+        private addProducts userControl11;
+        private System.Windows.Forms.Button button1;
         private buscar buscar1;
     }
 }
