@@ -230,7 +230,7 @@ namespace inventary
         }
 
 
-        private void clearAllItems()
+        public void clearAllItems()
         { 
             txtDescripcion.Clear();
             txtPrecio.Clear();

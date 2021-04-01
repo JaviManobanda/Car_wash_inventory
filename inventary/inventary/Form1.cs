@@ -14,7 +14,6 @@ namespace inventary
 {
     public partial class Form1 : Form
     {
-        addProducts addProduct;
         public Form1()
         {
             InitializeComponent();

@@ -17,7 +17,6 @@ namespace inventary
 
         MySqlConnection conexionBD;
         MySqlCommand sqlComman;
-        MySqlConnection conexionDB;
         MySqlDataReader sqlReader;
 
 
@@ -149,7 +148,7 @@ namespace inventary
 
             return dictValues;
         }
-        public Tuple< List<Products>, string>   searchProducts(string searchItem, string filter)
+        public List<Products>  searchProducts(string searchItem, string filter)
         {
             List<Products> ProductList = new List<Products>();
 
@@ -192,11 +191,11 @@ namespace inventary
                         Unidades = sqlReader.GetString(6),
                         Stock = sqlReader.GetString(7),
                         Packing = sqlReader.GetString(8),
-                        Bodega  = sqlReader.GetString(9)
+                        Bodega  = sqlReader.GetString(9),
+                        id_bodega_product = sqlReader.GetString(10)
                     });
 
-                    //tomo el id de la bodega y producto
-                    id_bodegaProduct = sqlReader.GetString(10);
+
                 }
                 conexionBD.Close();
 
@@ -207,7 +206,7 @@ namespace inventary
                 throw;
             }
 
-            return new Tuple<List<Products>, string> (ProductList,id_bodegaProduct) ;
+            return ProductList;
         }
 
 
@@ -236,6 +235,16 @@ namespace inventary
                 "where id =" + id_bodega_product;
 
             insertData(command);
+        }
+
+        public void deleteProduct(string id_product, string id_bodega_producto)
+        {
+            try
+            string command = "DELETE FROM bodega_product WHERE id =" + id_product;
+            insertData(command);
+            command = "DELETE FROM products WHERE idproducts =" + id_product;
+            insertData(command);
+
         }
     }
 }

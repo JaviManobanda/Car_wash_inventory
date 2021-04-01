@@ -16,15 +16,11 @@ namespace inventary
         string db = "inventary_car_wash";
         string user = "root";
         string password = "2527";
-        string id_bodega_product = string.Empty;
 
-        string[] filters = new string[] {
-            "Seleccionar ..",
-            "Nombre",
-            "Marca",
-            "Bodega",
-            "Descripción"
-        };
+        string initTextCbx = "Seleccionar ..";
+
+
+        Dictionary<string, string> FilterOptions = new Dictionary<string, string>() { };
         Products product;
 
         MySQL_Logic sql;
@@ -37,7 +33,14 @@ namespace inventary
         private void initComponents()
         {
             sql = MySQL_Logic.getInstance(servidor, db, user, password);
-            cbxFilter.Items.AddRange(filters);
+
+            FilterOptions.Add("Nombre","products.name");
+            FilterOptions.Add("Marca","marca.name");
+            FilterOptions.Add("Bodega","bodega.name");
+            FilterOptions.Add("Descripción","products.description");
+            List<string> listOptionsFilters = FilterOptions.Keys.ToList();
+            cbxFilter.Items.Add(initTextCbx);
+            cbxFilter.Items.AddRange(listOptionsFilters.ToArray());
             clearAll();
         }
 
@@ -56,31 +59,47 @@ namespace inventary
 
         }
 
+
+
         private void button2_Click(object sender, EventArgs e)
         {
-            var tupleValuesTable = sql.searchProducts(txtSearch.Text, "marca.name");
-            this.id_bodega_product = tupleValuesTable.Item2;
-            dataView.DataSource = tupleValuesTable.Item1;
+            try
+            {
+                dataView.DataSource = sql.searchProducts(txtSearch.Text, FilterOptions[cbxFilter.SelectedItem.ToString()]);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Ingrese un filtro", "Error",  MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {// envia todos los datos a actualizar
-            sql.updateProduct(
+
+            try
+            {
+                sql.updateProduct(
                 product.Id,
                 infoProduct.txtNombre.Text,
                 infoProduct.txtDescripcion.Text,
                 infoProduct.unidadesDict[infoProduct.cbxUnits.SelectedItem.ToString()],
                 infoProduct.CategoriaDict[infoProduct.cbxCategories.SelectedItem.ToString()],
                 infoProduct.MarcaDict[infoProduct.cbMarca.SelectedItem.ToString()],
-                product.Stock, infoProduct.PackingDict[infoProduct.CbxPacking.SelectedItem.ToString()],
+                infoProduct.txtQTY.Text,
+                infoProduct.PackingDict[infoProduct.CbxPacking.SelectedItem.ToString()],
                 infoProduct.BodegaDict[infoProduct.cbxBodega.SelectedItem.ToString()],
-                id_bodega_product                                                         
+                product.id_bodega_product
                 );
-        }
+                MessageBox.Show(product.ToString(), "se ha almacenado");
+                infoProduct.clearAllItems();
+            }
+            catch (Exception)
+            {
 
-        private void dataView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-       
+                MessageBox.Show("Selecciona un Item para actualizar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void dataView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -99,6 +118,7 @@ namespace inventary
                 product.Stock = dataView.Rows[e.RowIndex].Cells[7].Value.ToString();
                 product.Packing = dataView.Rows[e.RowIndex].Cells[8].Value.ToString();
                 product.Bodega= dataView.Rows[e.RowIndex].Cells[9].Value.ToString();
+                product.id_bodega_product = dataView.Rows[e.RowIndex].Cells[10].Value.ToString();
 
                 try
                 {
@@ -122,6 +142,21 @@ namespace inventary
                 }
 
             }
+        }
+
+        private void btnBorrar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                sql.deleteProduct(product.Id, product.id_bodega_product);
+                MessageBox.Show("Se borra");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
     }
 }

@@ -31,13 +31,12 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnBorrar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbxFilter = new System.Windows.Forms.ComboBox();
             this.chkTextExactly = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.infoProduct = new inventary.addProducts();
             this.dataView = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
@@ -74,24 +73,29 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button4
+            // btnGuardar
             // 
-            this.button4.Location = new System.Drawing.Point(35, 263);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 35;
-            this.button4.Text = "Guardar";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(107)))), ((int)(((byte)(53)))));
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardar.Image = global::inventary.Properties.Resources.save_as_32px;
+            this.btnGuardar.Location = new System.Drawing.Point(26, 242);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(50, 50);
+            this.btnGuardar.TabIndex = 35;
+            this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button5
+            // btnBorrar
             // 
-            this.button5.Location = new System.Drawing.Point(130, 263);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 35;
-            this.button5.Text = "Borrar";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnBorrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnBorrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBorrar.Image = global::inventary.Properties.Resources.delete_bin_30px;
+            this.btnBorrar.Location = new System.Drawing.Point(90, 242);
+            this.btnBorrar.Name = "btnBorrar";
+            this.btnBorrar.Size = new System.Drawing.Size(50, 50);
+            this.btnBorrar.TabIndex = 35;
+            this.btnBorrar.UseVisualStyleBackColor = false;
+            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
             // 
             // groupBox1
             // 
@@ -106,7 +110,7 @@
             this.groupBox1.Size = new System.Drawing.Size(247, 214);
             this.groupBox1.TabIndex = 38;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "Buscar";
             // 
             // cbxFilter
             // 
@@ -136,16 +140,9 @@
             this.label10.Text = "Filtro:";
             this.label10.Click += new System.EventHandler(this.label11_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(99, 366);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 40;
-            // 
             // infoProduct
             // 
-            this.infoProduct.Location = new System.Drawing.Point(305, 12);
+            this.infoProduct.Location = new System.Drawing.Point(362, 12);
             this.infoProduct.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.infoProduct.Name = "infoProduct";
             this.infoProduct.Size = new System.Drawing.Size(549, 462);
@@ -157,28 +154,25 @@
             this.dataView.Location = new System.Drawing.Point(35, 499);
             this.dataView.Name = "dataView";
             this.dataView.RowTemplate.Height = 24;
-            this.dataView.Size = new System.Drawing.Size(781, 150);
+            this.dataView.Size = new System.Drawing.Size(839, 150);
             this.dataView.TabIndex = 41;
             this.dataView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataView_CellClick);
-            this.dataView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataView_CellContentClick);
             // 
             // buscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dataView);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.infoProduct);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btnBorrar);
+            this.Controls.Add(this.btnGuardar);
             this.Name = "buscar";
-            this.Size = new System.Drawing.Size(859, 684);
+            this.Size = new System.Drawing.Size(918, 684);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataView)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -186,14 +180,13 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox chkTextExactly;
         private addProducts infoProduct;
         private System.Windows.Forms.ComboBox cbxFilter;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView dataView;
     }
 }

@@ -19,6 +19,6 @@ namespace inventary
         public string Stock { get; set; }
         public string Packing { get; set; }
         public string Bodega { get; set; }
-        
+        public string id_bodega_product { get; set; }
     }
 }
