@@ -31,7 +31,7 @@ namespace inventary
 
         private void button1_Click(object sender, EventArgs e)
         {
-            userControl11.saveData();
+            userControl11.saveData("Crear Nuevo Producto");
         }
 
         private void userControl11_Load(object sender, EventArgs e)
@@ -40,6 +40,11 @@ namespace inventary
         }
 
         private void buscar1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buscar1_Load_1(object sender, EventArgs e)
         {
 
         }

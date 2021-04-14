@@ -237,14 +237,22 @@ namespace inventary
             insertData(command);
         }
 
-        public void deleteProduct(string id_product, string id_bodega_producto)
+        public void deleteProduct(string id_product)
         {
-            try
-            string command = "DELETE FROM bodega_product WHERE id =" + id_product;
+            string command = "DELETE FROM products WHERE idproducts =" + id_product;
             insertData(command);
-            command = "DELETE FROM products WHERE idproducts =" + id_product;
-            insertData(command);
+        }
 
+        public void deleteBodega(string id_bodega_producto)
+        {
+            string command = "DELETE FROM bodega_product WHERE id =" + id_bodega_producto;
+            insertData(command);
+        }
+
+        public void deletedProduct_and_bodega(string id_product, string id_bodega_producto)
+        {
+            deleteBodega(id_bodega_producto);
+            deleteProduct(id_product);
         }
     }
 }

@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.userControl11 = new inventary.addProducts();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.buscar1 = new inventary.buscar();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -79,6 +80,15 @@
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.Click += new System.EventHandler(this.button1_Click);
             // 
+            // userControl11
+            // 
+            this.userControl11.Location = new System.Drawing.Point(222, 55);
+            this.userControl11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.userControl11.Name = "userControl11";
+            this.userControl11.Size = new System.Drawing.Size(549, 507);
+            this.userControl11.TabIndex = 0;
+            this.userControl11.Load += new System.EventHandler(this.userControl11_Load);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.buscar1);
@@ -91,21 +101,13 @@
             this.tabPage2.Text = "Buscar";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // userControl11
-            // 
-            this.userControl11.Location = new System.Drawing.Point(222, 55);
-            this.userControl11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.userControl11.Name = "userControl11";
-            this.userControl11.Size = new System.Drawing.Size(549, 507);
-            this.userControl11.TabIndex = 0;
-            this.userControl11.Load += new System.EventHandler(this.userControl11_Load);
-            // 
             // buscar1
             // 
             this.buscar1.Location = new System.Drawing.Point(32, 21);
             this.buscar1.Name = "buscar1";
             this.buscar1.Size = new System.Drawing.Size(952, 684);
             this.buscar1.TabIndex = 0;
+            this.buscar1.Load += new System.EventHandler(this.buscar1_Load_1);
             // 
             // Form1
             // 
@@ -113,10 +115,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1030, 731);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Sistema de Inventario";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

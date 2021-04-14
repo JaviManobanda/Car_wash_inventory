@@ -73,6 +73,16 @@ namespace inventary.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap delete_link_24px {
+            get {
+                object obj = ResourceManager.GetObject("delete_link_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap save_as_32px {
             get {
                 object obj = ResourceManager.GetObject("save_as_32px", resourceCulture);

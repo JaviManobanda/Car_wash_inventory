@@ -74,32 +74,57 @@ namespace inventary
             }
         }
 
+        private DialogResult messageDialog(string caption)
+        {
+            DialogResult result;
+            string message =
+                    $"Nombre del producto: {infoProduct.txtNombre.Text}\n" +
+                    $"Descripción: {infoProduct.txtDescripcion.Text}\n" +
+                    $"Precio:  \n" +
+                    $"Costo: \n" +
+                    $"Unidad: {infoProduct.unidadesDict[infoProduct.cbxUnits.SelectedItem.ToString()]}\n" +
+                    $"Código: {infoProduct.txtCodigo.Text} \n" +
+                    $"Categoría: {infoProduct.CategoriaDict[infoProduct.cbxCategories.SelectedItem.ToString()]}\n" +
+                    $"Bodega: {infoProduct.BodegaDict[infoProduct.cbxBodega.SelectedItem.ToString()]}\n" +
+                    $"Marca: {infoProduct.MarcaDict[infoProduct.cbMarca.SelectedItem.ToString()]}\n" +
+                    $"Cantidad total: {infoProduct.txtQTY.Text}\n" +
+                    $"Packing: {infoProduct.PackingDict[infoProduct.CbxPacking.SelectedItem.ToString()]}";
+
+            result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            return result;
+        }
         private void button4_Click(object sender, EventArgs e)
         {// envia todos los datos a actualizar
+            DialogResult result;
 
             try
-            {
-                sql.updateProduct(
-                product.Id,
-                infoProduct.txtNombre.Text,
-                infoProduct.txtDescripcion.Text,
-                infoProduct.unidadesDict[infoProduct.cbxUnits.SelectedItem.ToString()],
-                infoProduct.CategoriaDict[infoProduct.cbxCategories.SelectedItem.ToString()],
-                infoProduct.MarcaDict[infoProduct.cbMarca.SelectedItem.ToString()],
-                infoProduct.txtQTY.Text,
-                infoProduct.PackingDict[infoProduct.CbxPacking.SelectedItem.ToString()],
-                infoProduct.BodegaDict[infoProduct.cbxBodega.SelectedItem.ToString()],
-                product.id_bodega_product
-                );
-                MessageBox.Show(product.ToString(), "se ha almacenado");
-                infoProduct.clearAllItems();
-            }
-            catch (Exception)
-            {
+                {
+                result = messageDialog("Actualizar Datos");
 
-                MessageBox.Show("Selecciona un Item para actualizar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
+                    if (result == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        sql.updateProduct(
+                            product.Id,
+                            infoProduct.txtNombre.Text,
+                            infoProduct.txtDescripcion.Text,
+                            infoProduct.unidadesDict[infoProduct.cbxUnits.SelectedItem.ToString()],
+                            infoProduct.CategoriaDict[infoProduct.cbxCategories.SelectedItem.ToString()],
+                            infoProduct.MarcaDict[infoProduct.cbMarca.SelectedItem.ToString()],
+                            infoProduct.txtQTY.Text,
+                            infoProduct.PackingDict[infoProduct.CbxPacking.SelectedItem.ToString()],
+                            infoProduct.BodegaDict[infoProduct.cbxBodega.SelectedItem.ToString()],
+                            product.id_bodega_product
+                            );
+
+                        infoProduct.clearAllItems();
+                    }
+                    
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Selecciona un Item para actualizar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
         }
 
         private void dataView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -134,11 +159,14 @@ namespace inventary
                         product.Packing,
                         product.Bodega);
 
+
+
                 }
                 catch (Exception)
                 {
 
-                    throw;
+                    MessageBox.Show("Selecciona un Item para actualizar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
 
             }
@@ -146,17 +174,56 @@ namespace inventary
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
+            DialogResult result;
             try
             {
-                sql.deleteProduct(product.Id, product.id_bodega_product);
-                MessageBox.Show("Se borra");
+                result = messageDialog("Eliminar Producto y bodega");
+                if(result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    sql.deletedProduct_and_bodega(product.Id, product.id_bodega_product);
+                    infoProduct.clearAllItems();
+                }
+
             }
             catch (Exception)
             {
-
-                throw;
+                MessageBox.Show("Selecciona un Item para actualizar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        private void bntBorrarBodega_Click(object sender, EventArgs e)
+        {
+            DialogResult result;
+            try
+            {
+                result = messageDialog("Eliminar bodega");
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    sql.deleteBodega( product.id_bodega_product);
+                    infoProduct.clearAllItems();
+                }
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Selecciona un Item para actualizar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnGuardar_MouseHover(object sender, EventArgs e)
+        {
+            toolTipSave.Show("Guardar cambios", btnGuardar);
+        }
+
+        private void bntBorrarBodega_MouseHover(object sender, EventArgs e)
+        {
+            toolTipDelBodega.Show("Desvincular bodega", bntBorrarBodega);
+        }
+
+        private void btnBorrarAll_MouseMove(object sender, MouseEventArgs e)
+        {
+            toolTipDelAll.Show("Borra producto", btnBorrarAll);
         }
     }
 }

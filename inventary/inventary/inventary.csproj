@@ -134,5 +134,8 @@
   <ItemGroup>
     <None Include="imgen\save_as_32px.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="imgen\delete_link_24px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

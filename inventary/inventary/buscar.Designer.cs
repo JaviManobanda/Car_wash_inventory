@@ -28,17 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label11 = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnBorrar = new System.Windows.Forms.Button();
+            this.btnBorrarAll = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbxFilter = new System.Windows.Forms.ComboBox();
             this.chkTextExactly = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.infoProduct = new inventary.addProducts();
             this.dataView = new System.Windows.Forms.DataGridView();
+            this.bntBorrarBodega = new System.Windows.Forms.Button();
+            this.toolTipSave = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipDelBodega = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipDelAll = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataView)).BeginInit();
             this.SuspendLayout();
@@ -84,18 +89,20 @@
             this.btnGuardar.TabIndex = 35;
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.Click += new System.EventHandler(this.button4_Click);
+            this.btnGuardar.MouseHover += new System.EventHandler(this.btnGuardar_MouseHover);
             // 
-            // btnBorrar
+            // btnBorrarAll
             // 
-            this.btnBorrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnBorrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBorrar.Image = global::inventary.Properties.Resources.delete_bin_30px;
-            this.btnBorrar.Location = new System.Drawing.Point(90, 242);
-            this.btnBorrar.Name = "btnBorrar";
-            this.btnBorrar.Size = new System.Drawing.Size(50, 50);
-            this.btnBorrar.TabIndex = 35;
-            this.btnBorrar.UseVisualStyleBackColor = false;
-            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
+            this.btnBorrarAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnBorrarAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBorrarAll.Image = global::inventary.Properties.Resources.delete_bin_30px;
+            this.btnBorrarAll.Location = new System.Drawing.Point(154, 242);
+            this.btnBorrarAll.Name = "btnBorrarAll";
+            this.btnBorrarAll.Size = new System.Drawing.Size(50, 50);
+            this.btnBorrarAll.TabIndex = 35;
+            this.btnBorrarAll.UseVisualStyleBackColor = false;
+            this.btnBorrarAll.Click += new System.EventHandler(this.btnBorrar_Click);
+            this.btnBorrarAll.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnBorrarAll_MouseMove);
             // 
             // groupBox1
             // 
@@ -158,14 +165,37 @@
             this.dataView.TabIndex = 41;
             this.dataView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataView_CellClick);
             // 
+            // bntBorrarBodega
+            // 
+            this.bntBorrarBodega.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(138)))), ((int)(((byte)(7)))));
+            this.bntBorrarBodega.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bntBorrarBodega.Image = global::inventary.Properties.Resources.delete_link_24px;
+            this.bntBorrarBodega.Location = new System.Drawing.Point(90, 242);
+            this.bntBorrarBodega.Name = "bntBorrarBodega";
+            this.bntBorrarBodega.Size = new System.Drawing.Size(50, 50);
+            this.bntBorrarBodega.TabIndex = 43;
+            this.bntBorrarBodega.UseVisualStyleBackColor = false;
+            this.bntBorrarBodega.Click += new System.EventHandler(this.bntBorrarBodega_Click);
+            this.bntBorrarBodega.MouseHover += new System.EventHandler(this.bntBorrarBodega_MouseHover);
+            // 
+            // toolTipSave
+            // 
+            this.toolTipSave.Tag = "";
+            this.toolTipSave.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
+            // toolTipDelBodega
+            // 
+            this.toolTipDelBodega.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
             // buscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.bntBorrarBodega);
             this.Controls.Add(this.dataView);
             this.Controls.Add(this.infoProduct);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnBorrar);
+            this.Controls.Add(this.btnBorrarAll);
             this.Controls.Add(this.btnGuardar);
             this.Name = "buscar";
             this.Size = new System.Drawing.Size(918, 684);
@@ -181,12 +211,16 @@
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.Button btnBorrar;
+        private System.Windows.Forms.Button btnBorrarAll;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox chkTextExactly;
         private addProducts infoProduct;
         private System.Windows.Forms.ComboBox cbxFilter;
         private System.Windows.Forms.DataGridView dataView;
+        private System.Windows.Forms.Button bntBorrarBodega;
+        private System.Windows.Forms.ToolTip toolTipSave;
+        private System.Windows.Forms.ToolTip toolTipDelBodega;
+        private System.Windows.Forms.ToolTip toolTipDelAll;
     }
 }

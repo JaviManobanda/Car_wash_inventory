@@ -170,9 +170,11 @@ namespace inventary
         }
 
 
-        public void saveData()
+        public void saveData(string caption)
         {
             int isNumber = 0;
+            DialogResult result;
+
             List<TextBox> NumberTextbox = new List<TextBox>();
             NumberTextbox.Add(txtCosto);
             NumberTextbox.Add(txtPrecio);
@@ -186,45 +188,62 @@ namespace inventary
                 }
             }
 
+            string message = 
+                $"Nombre del producto: {txtNombre.Text}\n" +
+                $"Descripción: {txtDescripcion.Text}\n" +
+                $"Precio: {txtPrecio.Text} \n" +
+                $"Costo: {txtCosto.Text}\n" +
+                $"Unidad: {cbxUnits.SelectedItem.ToString()}\n" +
+                $"Código: {txtCodigo.Text}\n" +
+                $"Categoría: {cbxCategories.SelectedItem.ToString()}\n" +
+                $"Bodega: {cbxBodega.SelectedItem.ToString()}\n" +
+                $"Marca: {cbMarca.SelectedIndex.ToString()}\n" +
+                $"Cantidad total: {txtQTY.Text}\n" +
+                $"Packing: {CbxPacking.SelectedIndex.ToString()}";
 
+            result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question ,MessageBoxDefaultButton.Button2);
 
-            if (isNumber == NumberTextbox.Count)
+            if (result == System.Windows.Forms.DialogResult.Yes)
             {
-                string marca = cbMarca.SelectedItem.ToString().ToUpper();
-                string name = txtNombre.Text.ToUpper();
-                string units = cbxUnits.SelectedItem.ToString().ToUpper();
+                if (isNumber == NumberTextbox.Count)
+                {
 
-                string year = DateTime.Now.Year.ToString();
-                string year_cut = year.Substring(2, 2).ToUpper();
-                //creo el codigo para cada producto
-                string cod_product = year + marca.Substring(0, 3) + name.Replace(" ", string.Empty) + units.Substring(0, 3);
+                    string marca = cbMarca.SelectedItem.ToString().ToUpper();
+                    string name = txtNombre.Text.ToUpper();
+                    string units = cbxUnits.SelectedItem.ToString().ToUpper();
 
-                txtCodigo.Text = cod_product;
-                Thread.Sleep(20);
+                    string year = DateTime.Now.Year.ToString();
+                    string year_cut = year.Substring(2, 2).ToUpper();
+                    //creo el codigo para cada producto
+                    string cod_product = year + marca.Substring(0, 3) + name.Replace(" ", string.Empty) + units.Substring(0, 3);
 
-                // first add product
+                    txtCodigo.Text = cod_product;
+                    Thread.Sleep(20);
 
-                sql.AddProduct(name,
-                    txtDescripcion.Text.ToUpper(),
-                    txtPrecio.Text,
-                    txtCosto.Text,
-                    txtImagen.Text.ToUpper(),
-                    units,
-                    cbxCategories.SelectedItem.ToString().ToUpper(),
-                    marca,
-                    cod_product.ToUpper());
+                    // first add product
 
-                //second add bodega product
-                sql.addProduct_to_Bodega(cbxBodega.SelectedItem.ToString().ToUpper(),
-                    cod_product.ToUpper(),
-                    txtQTY.Text,
-                    CbxPacking.SelectedItem.ToString().ToUpper());
+                    sql.AddProduct(name,
+                        txtDescripcion.Text.ToUpper(),
+                        txtPrecio.Text,
+                        txtCosto.Text,
+                        txtImagen.Text.ToUpper(),
+                        units,
+                        cbxCategories.SelectedItem.ToString().ToUpper(),
+                        marca,
+                        cod_product.ToUpper());
 
-                clearAllItems();
-            }
-            else
-            {
-                MessageBox.Show("Revise los datos Por Favor");
+                    //second add bodega product
+                    sql.addProduct_to_Bodega(cbxBodega.SelectedItem.ToString().ToUpper(),
+                        cod_product.ToUpper(),
+                        txtQTY.Text,
+                        CbxPacking.SelectedItem.ToString().ToUpper());
+
+                    clearAllItems();
+                }
+                else
+                {
+                    MessageBox.Show("Revise los datos Por Favor");
+                }
             }
 
         }
